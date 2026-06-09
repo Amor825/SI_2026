@@ -6,7 +6,7 @@
 
 ## 🔬 Laboratorium 1 – Model Liniowy
 
-### 1. Zmiana liczby próbek (np. 1 000 000)
+### 1. Zmiana liczby próbek (np. 350 000)
 Wpływ zwiększenia skali danych na proces treningowy i stabilność modelu.
 
 <p align="center">
