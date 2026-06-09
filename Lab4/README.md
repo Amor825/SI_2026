@@ -75,7 +75,7 @@ Dense(2,   activation='softmax') → warstwa wyjściowa
 #### Przebieg treningu i wynik końcowy
 
 <p align="center">
-  <img src="Lab4/ss1-trening-wynik.png" alt="Przebieg treningu i wynik testu" width="85%"><br>
+  <img src="ss1-trening-wynik.png" alt="Przebieg treningu i wynik testu" width="85%"><br>
   <em>Przebieg treningu (13 epok, zatrzymany przez EarlyStopping) oraz wynik na zbiorze testowym: Test accuracy: 84.15%.</em>
 </p>
 
