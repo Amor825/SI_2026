@@ -56,12 +56,12 @@ Zgodnie z instrukcją laboratoryjną, przy użyciu biblioteki **OpenCV** oraz me
 #### Cyfra 3 – predykcja poprawna ✅
 
 <p align="center">
-  <img src="Lab3/ss1-predykcja-3.png" alt="Predykcja cyfry 3" width="85%"><br>
+  <img src="ss1-predykcja-3.png" alt="Predykcja cyfry 3" width="85%"><br>
   <em>Oryginalny obrazek cyfry 3 oraz obraz po przetworzeniu do formatu 28×28. Model poprawnie rozpoznał cyfrę z pewnością 100%.</em>
 </p>
 
 <p align="center">
-  <img src="Lab3/ss2-histogram-3.png" alt="Histogram prawdopodobieństw - cyfra 3" width="75%"><br>
+  <img src="ss2-histogram-3.png" alt="Histogram prawdopodobieństw - cyfra 3" width="75%"><br>
   <em>Rozkład prawdopodobieństwa predykcji – model przypisał 100% pewności klasie „3". Brak jakichkolwiek wątpliwości klasyfikatora.</em>
 </p>
 
@@ -70,7 +70,7 @@ Zgodnie z instrukcją laboratoryjną, przy użyciu biblioteki **OpenCV** oraz me
 #### Cyfra 5 – predykcja poprawna ✅
 
 <p align="center">
-  <img src="Lab3/ss3-predykcja-5.png" alt="Predykcja cyfry 5" width="85%"><br>
+  <img src="ss3-predykcja-5.png" alt="Predykcja cyfry 5" width="85%"><br>
   <em>Obrazek cyfry 5 rozpoznany poprawnie z pewnością 99.99%. Obraz po przeskalowaniu do 28×28 zachował czytelną strukturę cyfry.</em>
 </p>
 
@@ -79,12 +79,12 @@ Zgodnie z instrukcją laboratoryjną, przy użyciu biblioteki **OpenCV** oraz me
 #### Cyfra 9 – predykcja błędna ❌
 
 <p align="center">
-  <img src="Lab3/ss4-predykcja-9-bledna.png" alt="Predykcja cyfry 9 - błędna" width="85%"><br>
+  <img src="ss4-predykcja-9-bledna.png" alt="Predykcja cyfry 9 - błędna" width="85%"><br>
   <em>Obrazek cyfry 9 – model błędnie sklasyfikował go jako cyfrę 8 z pewnością jedynie 36.5%. Po przeskalowaniu do 28×28 widać znaczną utratę szczegółów kształtu cyfry 9.</em>
 </p>
 
 <p align="center">
-  <img src="Lab3/ss5-histogram-9-bledna.png" alt="Histogram prawdopodobieństw - cyfra 9 błędna" width="75%"><br>
+  <img src="ss5-histogram-9-bledna.png" alt="Histogram prawdopodobieństw - cyfra 9 błędna" width="75%"><br>
   <em>Rozkład prawdopodobieństwa dla cyfry 9: model rozłożył pewność między kilka klas (8: 36.5%, 9: 32.7%, 3: 18.9%, 5: 11.9%), co wskazuje na niską pewność i błędną klasyfikację.</em>
 </p>
 
@@ -93,7 +93,7 @@ Zgodnie z instrukcją laboratoryjną, przy użyciu biblioteki **OpenCV** oraz me
 ### 5. Podsumowanie wyników własnych obrazków
 
 <p align="center">
-  <img src="Lab3/ss6-wynik-skutecznosc.png" alt="Wynik końcowy - skuteczność" width="85%"><br>
+  <img src="ss6-wynik-skutecznosc.png" alt="Wynik końcowy - skuteczność" width="85%"><br>
   <em>Zbiorczy wynik predykcji na własnych obrazkach: skuteczność 2/3 = 67%.</em>
 </p>
 
