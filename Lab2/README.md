@@ -9,7 +9,7 @@ Model oparty jest na architekturze sekwencyjnej (`tf.keras.Sequential`) z jedną
 ### 1. Konfiguracja środowiska i wczytanie danych
 
 <p align="center">
-  <img src="Lab2/ss1-importy-dane.png" alt="Import bibliotek i wczytanie danych" width="85%"><br>
+  <img src="ss1-importy-dane.png" alt="Import bibliotek i wczytanie danych" width="85%"><br>
   <em>Import bibliotek (TensorFlow 2.19.0, NumPy, Matplotlib) oraz wczytanie danych treningowych z pliku TF_dataset.npz. Rozmiar wejścia: 2, rozmiar wyjścia: 1.</em>
 </p>
 
@@ -24,12 +24,12 @@ Zgodnie z instrukcją laboratoryjną przetestowano kilka kombinacji optymizator�
 #### 2a. Optymizator: `AdamW`, Funkcja straty: `mean_absolute_error`
 
 <p align="center">
-  <img src="Lab2/ss2-trening-adamw.png" alt="Trening AdamW MAE - przebieg" width="85%"><br>
+  <img src="ss2-trening-adamw.png" alt="Trening AdamW MAE - przebieg" width="85%"><br>
   <em>Przebieg treningu (600 epok) z optymizatorem AdamW i funkcją straty MAE. Strata startuje od ~70 i stopniowo maleje.</em>
 </p>
 
 <p align="center">
-  <img src="Lab2/ss3-wagi-wykres-adamw.png" alt="Wagi i wykres predykcji - AdamW MAE" width="85%"><br>
+  <img src="ss3-wagi-wykres-adamw.png" alt="Wagi i wykres predykcji - AdamW MAE" width="85%"><br>
   <em>Wyuczone wagi: [12.71, -7.01], bias: -9.27. Wykres predykcji outputs vs targets – model nie zdołał w pełni zbiec do prawidłowych parametrów (oczekiwano: 13, -7, -12). AdamW z MAE wykazuje wolniejszą zbieżność na tym zbiorze.</em>
 </p>
 
@@ -38,12 +38,12 @@ Zgodnie z instrukcją laboratoryjną przetestowano kilka kombinacji optymizator�
 #### 2b. Optymizator: `SGD`, Funkcja straty: `mean_squared_error`
 
 <p align="center">
-  <img src="Lab2/ss4-trening-sgd.png" alt="Trening SGD MSE - przebieg" width="85%"><br>
+  <img src="ss4-trening-sgd.png" alt="Trening SGD MSE - przebieg" width="85%"><br>
   <em>Przebieg treningu (600 epok) z klasycznym gradientem prostym (SGD) i stratą MSE (L2-norm). Strata osiąga wartości rzędu 3e-10 – praktycznie zero, co świadczy o doskonałym dopasowaniu.</em>
 </p>
 
 <p align="center">
-  <img src="Lab2/ss5-wagi-wykres-sgd.png" alt="Wagi i wykres predykcji - SGD MSE" width="85%"><br>
+  <img src="ss5-wagi-wykres-sgd.png" alt="Wagi i wykres predykcji - SGD MSE" width="85%"><br>
   <em>Wyuczone wagi: [13.0, -7.0], bias: -12.0 – niemal idealne odwzorowanie zadanej funkcji targets = 13·xs - 7·zs - 12. Wykres predykcji pokazuje perfekcyjnie liniową zależność.</em>
 </p>
 
@@ -54,12 +54,12 @@ Zgodnie z instrukcją laboratoryjną przetestowano kilka kombinacji optymizator�
 #### 2c. Optymizator: `RMSprop`, Funkcja straty: `mean_squared_error`
 
 <p align="center">
-  <img src="Lab2/ss6-trening-rmsprop.png" alt="Trening RMSprop MSE - przebieg" width="85%"><br>
+  <img src="ss6-trening-rmsprop.png" alt="Trening RMSprop MSE - przebieg" width="85%"><br>
   <em>Przebieg treningu (600 epok) z optymizatorem RMSprop i stratą MSE. W okolicach epoki 273 strata wynosi ~386 i maleje stopniowo – zbieżność wyraźnie wolniejsza niż SGD.</em>
 </p>
 
 <p align="center">
-  <img src="Lab2/ss7-wagi-wykres-rmsprop.png" alt="Wagi i wykres predykcji - RMSprop MSE" width="85%"><br>
+  <img src="ss7-wagi-wykres-rmsprop.png" alt="Wagi i wykres predykcji - RMSprop MSE" width="85%"><br>
   <em>Wyuczone wagi: [13.00, -7.00], bias: -12.00 – model poprawnie odtworzył parametry funkcji. Pomimo wolniejszego treningu, RMSprop ostatecznie zbiega do prawidłowego rozwiązania.</em>
 </p>
 
