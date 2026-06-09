@@ -29,7 +29,7 @@ Dane pochodzą z platformy sprzedającej audiobooki. Każdy rekord reprezentuje 
 
 Dane przed przekazaniem do modelu wymagały kilku kroków przygotowania:
 
-**Balansowanie klas** — w surowych danych klasa 0 (nie wrócił) znacznie przeważa nad klasą 1. Nadmiarowe próbki klasy 0 zostały usunięte, tak aby obie klasy miały zbliżoną liczność (~50/50). Bez tego modelu trenowany na niezbalansowanym zbiorze uczy się głównie przewidywać klasę dominującą.
+**Balansowanie klas** — w surowych danych klasa 0 (nie wrócił) znacznie przeważa nad klasą 1. Nadmiarowe próbki klasy 0 zostały usunięte, tak aby obie klasy miały zbliżoną liczność (~50/50). Bez tego model trenowany na niezbalansowanym zbiorze uczy się głównie przewidywać klasę dominującą.
 
 **Normalizacja** — dane wejściowe zostały znormalizowane metodą `preprocessing.scale()` z biblioteki `sklearn` (standaryzacja do średniej 0 i odchylenia 1). Jest to konieczne, ponieważ cechy mają bardzo różne zakresy wartości (np. minuty w tysiącach vs. wartości 0/1).
 
@@ -45,7 +45,7 @@ Audiobooks_data_validation.npz
 Audiobooks_data_test.npz
 ```
 
-Wyniki podziału (przykład jednego uruchomienia):
+Wyniki podziału:
 ```
 Train:      3579 próbek | prop. kl. 1: ~50.2%
 Validation:  447 próbek | prop. kl. 1: ~49.7%
@@ -59,41 +59,34 @@ Test:        448 próbek | prop. kl. 1: ~48.9%
 #### Architektura
 
 ```
-Dense(100, activation='relu')   → warstwa ukryta 1
-Dense(100, activation='relu')   → warstwa ukryta 2
+Dense(100, activation='relu')    → warstwa ukryta 1
+Dense(100, activation='relu')    → warstwa ukryta 2
 Dense(2,   activation='softmax') → warstwa wyjściowa
 ```
 
 - **Input size:** 10 (liczba cech)
 - **Output size:** 2 (klasy: wróci / nie wróci)
-- **Hidden layer size:** 100 neuronów (kluczowa zmiana względem domyślnego 10)
+- **Hidden layer size:** 100 neuronów
 - **Optymizator:** Adam
 - **Funkcja straty:** `sparse_categorical_crossentropy`
 - **Batch size:** 100
 - **Max epok:** 100 (z `EarlyStopping(patience=2)`)
 
-#### Dlaczego hidden_layer_size=100, a nie 10?
+#### Przebieg treningu i wynik końcowy
 
-Oryginalny kod używał `hidden_layer_size=10`, co okazało się zbyt małą pojemnością modelu dla tego zbioru danych — sieć z 10 neuronami osiągała jedynie ~83% na zbiorze testowym. Zwiększenie do 100 neuronów pozwala modelowi uchwycić bardziej złożone zależności między cechami, co przekłada się na osiągnięcie wymaganego progu **90%+**.
+<p align="center">
+  <img src="Lab4/ss1-trening-wynik.png" alt="Przebieg treningu i wynik testu" width="85%"><br>
+  <em>Przebieg treningu (13 epok, zatrzymany przez EarlyStopping) oraz wynik na zbiorze testowym: Test accuracy: 84.15%.</em>
+</p>
 
-#### Wyniki treningu
-
-Model zatrzymywany jest przez `EarlyStopping` gdy strata walidacyjna przestaje maleć. Przykładowy przebieg ostatnich epok:
-
-```
-Epoch 30/100  72/72 - accuracy: 0.8008 - loss: 0.3626 - val_accuracy: 0.8345 - val_loss: 0.3262
-Epoch 31/100  72/72 - accuracy: 0.8039 - loss: 0.3611 - val_accuracy: 0.8166 - val_loss: 0.3291
-Epoch 32/100  72/72 - accuracy: 0.8086 - loss: 0.3604 - val_accuracy: 0.8322 - val_loss: 0.3274
-```
+Model zatrzymał się po 13 epokach — `EarlyStopping(patience=2)` wykrył, że strata walidacyjna przestała maleć. Accuracy na zbiorze walidacyjnym oscylowało w okolicach 82–83%, a na zbiorze testowym model osiągnął **84.15%**.
 
 #### Wynik końcowy na zbiorze testowym
 
-| Metryka | Wynik (hidden=10, oryginał) | Wynik (hidden=100, v2) |
-| :---: | :---: | :---: |
-| **Test accuracy** | 83.04% | **≥ 90%** |
-| **Test loss** | 0.35 | < 0.28 |
-
-> **Uwaga:** Ze względu na losową inicjalizację wag i tasowanie danych, dokładny wynik może nieznacznie różnić się przy każdym uruchomieniu. Model z `hidden_layer_size=100` osiąga ponad 90% skuteczności przy prawidłowo przygotowanych danych.
+| Metryka | Wynik |
+| :---: | :---: |
+| **Test accuracy** | **84.15%** |
+| **Test loss** | **0.35** |
 
 ---
 
@@ -103,8 +96,8 @@ Laboratorium pokazało pełny pipeline pracy z danymi biznesowymi w uczeniu masz
 
 **Preprocessing jest kluczowy.** Bez balansowania klas i normalizacji model uczyłby się nieprawidłowo — dominująca klasa "zniekształcałaby" gradient, a różne skale cech spowalniałyby zbieżność.
 
-**Rozmiar warstw ukrytych ma duże znaczenie.** Zwiększenie `hidden_layer_size` z 10 do 100 neuronów pozwoliło modelowi uchwycić bardziej złożone wzorce i przeskoczyć z 83% do ponad 90% skuteczności.
+**EarlyStopping chroni przed przeuczeniem.** Model zatrzymał się po 13 epokach, gdy strata walidacyjna przestała się poprawiać — mechanizm ten skutecznie zapobiega zapamiętywaniu danych treningowych.
 
-**EarlyStopping chroni przed przeuczeniem.** Mechanizm wczesnego zatrzymania zapobiega sytuacji, gdy model "zapamiętuje" dane treningowe kosztem generalizacji na nowych przykładach.
+**Wynik 84% na tym zbiorze jest poprawny.** Zbiór Audiobooks jest relatywnie trudny — dane są zaszumione, a wzorce zachowań klientów nie są w pełni liniowo separowalne. Wynik ~84% jest spójny z typowymi rezultatami dla prostej sieci feedforward na tym zbiorze danych.
 
 > **Wniosek końcowy:** Model skutecznie identyfikuje klientów, którzy prawdopodobnie wrócą do platformy, co w praktyce biznesowej pozwala zoptymalizować wydatki na marketing — koncentrując budżet reklamowy na osobach z wysokim prawdopodobieństwem ponownego zakupu.
