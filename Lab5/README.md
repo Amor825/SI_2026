@@ -7,12 +7,12 @@ Celem laboratorium było zbudowanie rekurencyjnych sieci neuronowych (RNN) z bra
 ### 1. Opis danych
 
 <p align="center">
-  <img src="Lab5/ss4-dane-head.png" alt="Wczytanie danych IBM" width="85%"><br>
+  <img src="ss4-dane-head.png" alt="Wczytanie danych IBM" width="85%"><br>
   <em>Wczytanie danych z pliku IBM_2006-01-01_to_2018-01-01.csv. Dane zawierają kolumny: Open, High, Low, Close, Volume.</em>
 </p>
 
 <p align="center">
-  <img src="Lab5/ss3-wizualizacja-danych.png" alt="Wizualizacja danych IBM" width="85%"><br>
+  <img src="ss3-wizualizacja-danych.png" alt="Wizualizacja danych IBM" width="85%"><br>
   <em>Wizualizacja zbioru treningowego (niebieski, lata 2006–2016) i testowego (czerwony, rok 2017). Widoczny jest trend wzrostowy do 2013 r. i spadkowy od 2014 r.</em>
 </p>
 
@@ -30,12 +30,12 @@ Przed optymalizacją uruchomiono bazowe wersje obu architektur:
 | **GRU bazowy** | 4.04 | 3.59 | 2.27% |
 
 <p align="center">
-  <img src="Lab5/ss2-lstm-bazowy.png" alt="LSTM bazowy" width="85%"><br>
+  <img src="ss2-lstm-bazowy.png" alt="LSTM bazowy" width="85%"><br>
   <em>LSTM bazowy: optimizer=rmsprop, loss=MSE, units=50, epochs=50. RMSE=4.00, MAE=3.25, MAPE=2.04%.</em>
 </p>
 
 <p align="center">
-  <img src="Lab5/ss1-gru-bazowy.png" alt="GRU bazowy" width="85%"><br>
+  <img src="ss1-gru-bazowy.png" alt="GRU bazowy" width="85%"><br>
   <em>GRU bazowy: optimizer=rmsprop, loss=MSE, units=50, Early Stopping(loss). RMSE=4.04, MAE=3.59, MAPE=2.27%.</em>
 </p>
 
@@ -51,7 +51,7 @@ Wprowadzono następujące zmiany względem bazowego LSTM:
 - **[E]** `EarlyStopping(monitor='val_loss', patience=5)` + `validation_split=0.1` — właściwsze monitorowanie na zbiorze walidacyjnym zamiast treningowym
 
 <p align="center">
-  <img src="Lab5/ss5-lstm-adam-huber.png" alt="LSTM zoptymalizowany" width="85%"><br>
+  <img src="ss5-lstm-adam-huber.png" alt="LSTM zoptymalizowany" width="85%"><br>
   <em>LSTM po optymalizacji (units=100, Adam, Huber, EarlyStopping val_loss): RMSE=2.99, MAE=2.06, MAPE=1.29%. Widoczna znaczna poprawa dopasowania niebieskiej linii do czerwonej.</em>
 </p>
 
@@ -68,7 +68,7 @@ Wprowadzono następujące zmiany względem bazowego LSTM:
 ### 4. Eksperyment D – predykcja atrybutu `Close` zamiast `High`
 
 <p align="center">
-  <img src="Lab5/ss7-close-predykcja.png" alt="Predykcja Close" width="85%"><br>
+  <img src="ss7-close-predykcja.png" alt="Predykcja Close" width="85%"><br>
   <em>Model LSTM dla atrybutu Close: RMSE=3.63, MAE=2.68, MAPE=1.70%. Wynik gorszy niż dla High — atrybut Close jest bardziej zaszumiony.</em>
 </p>
 
@@ -86,7 +86,7 @@ Wprowadzono następujące zmiany względem bazowego LSTM:
 Zastosowano architekturę GRU z pełną optymalizacją: `units=100`, `optimizer='adam'`, `loss='huber'`, `EarlyStopping(monitor='val_loss', patience=5)`.
 
 <p align="center">
-  <img src="Lab5/ss8-gru-finalny.png" alt="GRU finalny - RMSE 1.78" width="85%"><br>
+  <img src="ss8-gru-finalny.png" alt="GRU finalny - RMSE 1.78" width="85%"><br>
   <em>Finalny model GRU: RMSE=1.78, MAE=1.15, MAPE=0.72%. Cel RMSE &lt; 2.0 osiągnięty. Niebieska linia predykcji niemal pokrywa się z rzeczywistymi cenami.</em>
 </p>
 
